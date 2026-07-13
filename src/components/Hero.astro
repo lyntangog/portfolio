@@ -1,0 +1,82 @@
+---
+---
+<section id="intro" class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">	Learning new things and solving problems. </p>
+      <h1>Gwyn Tangog</h1>
+      <p class="tagline">
+        Software engineer with a strong background in research and theory.
+
+      </p>
+      <p class="contact">Reach me at <a href="mailto:gwynt@mit.edu">gwynt@mit.edu</a></p>
+      <div class="actions">
+        <a class="btn solid" href="#education">View my work ↓</a>
+        <a class="btn" href="/resume.pdf" download>Download resume ↓</a>
+        <a class="btn" href="/your-repo-name/hobby">Check out my side quests! →</a>
+      </div>
+    </div>
+    <div class="hero-portrait" aria-hidden="true">
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 72px 0 56px;
+    background: #ffffff;
+  }
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .hero-text {
+    flex: 1;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    margin-bottom: 10px;
+  }
+  .tagline {
+    max-width: 46ch;
+    font-size: 1.05rem;
+  }
+  .contact {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink);
+    opacity: 0.75;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .hero-portrait {
+    flex-shrink: 0;
+  }
+  .portrait-frame {
+    width: 180px;
+    height: 180px;
+    border-radius: 16px;
+    background: var(--blue-pale);
+    border: 2px solid var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 640px) {
+    .hero-inner {
+      flex-direction: column-reverse;
+      text-align: left;
+    }
+  }
+</style>

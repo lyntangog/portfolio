@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import TimelineItem from '../components/TimelineItem.astro';
+import Footer from '../components/Footer.astro';
+import Gallery from '../components/Gallery.astro';
+---
+
+<Layout title="Gwyn Tangog">
+  <Nav />
+  <Hero />
+
+  <Section id="education" eyebrow="01 / background" title="Education">
+    <Timeline>
+      <TimelineItem date="2027" title="M.Eng. in Computer Science" org="Massachusetts Institute of Technology">
+      </TimelineItem>
+      <TimelineItem date="2026" title="B.S. in Computer Science and Engineering & Mathematics" org="Massachusetts Institute of Technology">
+      </TimelineItem>
+      <TimelineItem date="2022" title="International Baccalaureate Diploma" org="Southvile International School and Colleges">
+      </TimelineItem>
+    </Timeline>
+  </Section>
+
+
+  <Section id="achievements" eyebrow="01 / background" title="Achievements">
+    <Timeline>
+      <TimelineItem date="2026" title="Eta Kappa Nu Honor Society" org="Massachusetts Institute of Technology">
+      </TimelineItem>
+      <TimelineItem date="2024" title="Outstanding UROP (Undergraduate Research Opportunity) Student Award" org="Massachusetts Institute of Technology">
+      </TimelineItem>
+      <TimelineItem date="2019" title="China Girls' Math Olympiad - Silver Medalist">
+      </TimelineItem>
+      <TimelineItem date="2019" title="Philippine Math Olympiad National Finalist (Top 22)">
+      </TimelineItem>
+    </Timeline>
+  </Section>
+
+  <Section id="research" eyebrow="02 / what I work on" title="Research">
+    <p>
+      Current interests lie in theoretical computer science, particularly
+      counting complexity and hardness. Past work spans sustainability and
+      economics.
+    </p>
+    <Timeline>
+      <TimelineItem date="Jun 2025 – present" title="Counting Complexity of Solo Chess" org="MIT Theory of Computation">
+        <p>
+          Proved ASP-completeness via reductions from Hamiltonian paths and
+          Knight's Tours, and generalized the result to several fairy pieces.
+          Manuscript in progress.
+        </p>
+      </TimelineItem>
+      <TimelineItem date="Feb 2025 – May 2025" title="Hardness of Graph Threading in Grid Graphs" org="MIT Theory of Computation">
+        <p>
+          Studied the grid-graph case of Graph Threading; found a
+          polynomial-time algorithm for a special case while investigating
+          NP-hardness.
+        </p>
+      </TimelineItem>
+      <TimelineItem date="Sep 2023 – May 2024" title="Gamification Data & Concrete Delivery Workforce" org="MIT Concrete Sustainability Hub">
+        <p>
+          Analyzed driver productivity and retention data with Python;
+          presented a research poster to industry stakeholders.
+        </p>
+      </TimelineItem>
+      <TimelineItem date="Sep 2023 – May 2024" title="Heterogeneity of Child Penalty" org="MIT Economics Department">
+        <p>Reviewed related literature and modeled trends in STATA.</p>
+      </TimelineItem>
+    </Timeline>
+  </Section>
+
+  <Section id="extracurriculars" eyebrow="03 / outside the lab" title="Extracurriculars">
+    <Timeline>
+      <TimelineItem date="Aug 2024 – present" title="Resident Peer Mentor" org="MIT McCormick Hall">
+        <p>Organize study breaks and mentor first-years on classes, friendships, and clubs.</p>
+      </TimelineItem>
+      <TimelineItem date="2024 – 2025" title="International Orientation Coordinator" org="MIT">
+        <p>Coordinated events for incoming international students; designed the orientation photobook.</p>
+      </TimelineItem>
+      <TimelineItem date="Feb 2023 – Dec 2024" title="Research Editor & Web Master" org="MIT Undergraduate Research Journal">
+        <p>Reviewed articles for publication and interviewed MIT faculty for two issues.</p>
+      </TimelineItem>
+    </Timeline>
+  </Section>
+
+  <Section id="hobbies" eyebrow="04 / off the clock" title="Hobbies">
+    <div class="hobby-grid">
+      <div class="card">
+        <p class="eyebrow">guitar & vocals</p>
+        <p>Played lead guitar and sang in a student band — replace with what you actually do for fun.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">hobby two</p>
+        <p>Short description of another hobby — chess, climbing, cooking, whatever fits.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">hobby three</p>
+        <p>Add as many of these cards as you like — the grid wraps automatically.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="awards" eyebrow="05 / recognition" title="Awards">
+    <Timeline>
+      <TimelineItem date="May 2024" title="Outstanding UROP Student Award" org="MIT UROP Office">
+        <p>Awarded for contributions to the Concrete Sustainability Hub, including two research posters.</p>
+      </TimelineItem>
+      <TimelineItem date="Sep 2024, Sep 2025" title="Eta Kappa Nu Honor Society" org="MIT EECS">
+        <p>Invited as a top-quartile junior and again as a senior.</p>
+      </TimelineItem>
+    </Timeline>
+  </Section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+</style>

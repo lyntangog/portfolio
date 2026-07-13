@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavH from '../components/NavH.astro';
+import HeroH from '../components/HeroH.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import TimelineItem from '../components/TimelineItem.astro';
+import Footer from '../components/Footer.astro';
+import Gallery from '../components/Gallery.astro';
+---
+
+<Layout title="Gwyn Tangog">
+  <NavH />
+  <HeroH />
+
+  <Section id="VisualArts" eyebrow="" title="&#9998 Traditional Art">
+    <p>I started out overwhelmed by colors, so I started by taking traditional graphite pencil lessons online! &#128221</p>
+
+      <Gallery images={[
+        {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+        {src: `${import.meta.env.BASE_URL}/assets/placeholder2.png`, alt: "Project 1"},
+        {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},,
+      ]} />
+
+  </Section>
+
+
+
+  <Section id="DigitalArts" eyebrow="" title="&#128396 Digital Art">
+    <p>I got inspired by an art trend going around on YouTube where artists would draw their favorite
+    characters in their style. That was my first digital project! </p>
+
+    <Gallery images={[
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder2.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+    ]} />
+
+  </Section>
+
+   <Section id="Crochet" eyebrow="" title="&#x1F9F6 Crochet">
+    <p>Got back into it after a few years since I wanted to make a plushie of my mochi
+    character. &#x1F361 I like soft things.</p>
+
+    <Gallery images={[
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder2.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+    ]} />
+
+  </Section>
+
+   <Section id="Pokemon Cards" eyebrow="" title="&#127922 Pokemon Cards">
+    <p>I started out collecting the cards a few months ago, then got into the game shortly after.
+    I enjoy strategy games, and this reminds me of being excited to play chess after school in
+    elementary school. &#x1F389; I collect full arts of steel types and ghost types, and I currently
+    play two different decks: Dragapult &#x1F432 &#128053 and Mega Venusaur  &#x1F33F &#x2600;&#xFE0F.</p>
+
+    <Gallery images={[
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder2.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+    ]} />
+
+  </Section>
+
+  <Section id="Music" eyebrow="" title="&#127908 Music">
+    <p>Even though I really wanted to sing, I learned to play fingerstyle guitar because I was insecure of my voice.
+    Over time, I overcame the insecurity, and I have performed as vocalist and guitarist multiple times!</p>
+
+    <Gallery images={[
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder2.png`, alt: "Project 1"},
+      {src: `${import.meta.env.BASE_URL}/assets/placeholder1.png`, alt: "Project 1"},
+    ]} />
+
+  </Section>
+
+   <Section id="Others" eyebrow="" title="&#9823 Others">
+    <p>I also like playing video games and writing poetry, but there aren't any interesting pictures for those.</p>
+
+  </Section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+</style>

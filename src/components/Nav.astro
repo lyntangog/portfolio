@@ -1,0 +1,70 @@
+---
+const links = [
+  { href: '#intro', label: 'Intro' },
+  { href: '#education', label: 'Education' },
+  { href: '#research', label: 'Research' },
+  { href: '#extracurriculars', label: 'Extracurriculars' },
+  { href: '#hobbies', label: 'Hobbies' },
+  { href: '#awards', label: 'Awards' },
+];
+---
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#intro"> &#x1F4BB Gwyn Tangog</a>
+    <nav class="links" aria-label="Section navigation">
+      {links.map((l) => (
+        <a href={l.href}>{l.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #e1f1fd;
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--blue-deep);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .links a {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .links a:hover {
+    color: var(--blue);
+  }
+  @media (max-width: 640px) {
+    .nav-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .links {
+      gap: 12px;
+    }
+  }
+</style>
