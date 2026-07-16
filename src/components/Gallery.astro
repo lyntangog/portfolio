@@ -6,6 +6,7 @@ export interface GalleryImage {
   video?: string;     // any YouTube URL, or a bare video ID
   alt: string;
   caption?: string;
+  subcaption?: string;
 }
 
 interface Props {
@@ -51,6 +52,7 @@ function getVideoRatio(url: string): string {
         data-index={i}
         data-type={image.video ? 'video' : 'image'}
         data-video-ratio={image.video ? getVideoRatio(image.video) : undefined}
+        data-subcaption={image.subcaption ?? ''}
         aria-label={image.caption ?? image.alt}
       >
         {image.video ? (
@@ -73,6 +75,7 @@ function getVideoRatio(url: string): string {
   </div>
 
   <p class="carousel-caption"></p>
+  <p class="carousel-subcaption"></p>
 
   <div class="button-container">
     <button class="carousel-btn prev" type="button" aria-label="Previous image">
@@ -216,6 +219,15 @@ function getVideoRatio(url: string): string {
     color: #444;
     text-align: center;
     min-height: 1.2em;
+    font-weight: bold
+  }
+
+   .carousel-subcaption {
+    margin: 0;
+    font-size: 1.0rem;
+    color: #444;
+    text-align: center;
+    min-height: 1.0em;
   }
 
   @media (max-width: 480px) {
@@ -228,6 +240,7 @@ function getVideoRatio(url: string): string {
     root: HTMLElement;
     items: HTMLElement[];
     captionEl: HTMLElement;
+    subcaptionEl: HTMLElement
     index: number;
 
     static MEDIUM_RANGE  = 1;
@@ -237,6 +250,7 @@ function getVideoRatio(url: string): string {
       this.root      = root;
       this.items     = Array.from(root.querySelectorAll('.carousel-item'));
       this.captionEl = root.querySelector('.carousel-caption')!;
+      this.subcaptionEl = root.querySelector('.carousel-subcaption')!;
       this.index     = Number(root.dataset.start) || 0;
 
       this.items.forEach((item) => {
@@ -318,6 +332,7 @@ function getVideoRatio(url: string): string {
       const img     = current.querySelector<HTMLImageElement>('img');
       const iframe  = current.querySelector<HTMLIFrameElement>('iframe');
       this.captionEl.textContent = img?.alt ?? iframe?.title ?? '';
+      this.subcaptionEl.textContent = current.dataset.subcaption ?? '';
     }
   }
 
