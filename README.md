@@ -23,3 +23,9 @@ npm run dev        # http://localhost:4321
 # NEXT TO DOs
 - add a subcaption to hobby gallery
 - add a dropdown to timelines
+- education
+- industry
+- research
+- teaching
+- extra currs:
+- awards
