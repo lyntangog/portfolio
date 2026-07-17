@@ -7,11 +7,25 @@ import Timeline from '../components/Timeline.astro';
 import TimelineItem from '../components/TimelineItem.astro';
 import Footer from '../components/Footer.astro';
 import Gallery from '../components/Gallery.astro';
+import Highlights from '../components/Highlights.astro';
+
 ---
 
 <Layout title="Gwyn Tangog">
   <Nav />
   <Hero />
+
+  <Section id="highlights" eyebrow="00 / " title="Highlights and Featured Work">
+    <Highlights items={[
+    {
+    category: 'Research',
+    title: 'Demo here',
+    description: '',
+    thumbnail: '',
+    href: '',
+  },
+  ]} />
+  </Section>
 
   <Section id="education" eyebrow="01 / " title="Education">
     <Timeline>

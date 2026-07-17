@@ -1,0 +1,372 @@
+---
+// src/components/Highlights.astro
+
+export interface HighlightItem {
+  category: string;     // 'Project' | 'Research' | 'Publication' | etc.
+  title: string;
+  description: string;
+  thumbnail: string;
+  alt?: string;
+  href: string;         // Google Drive, YouTube, GitHub — anything
+}
+
+interface Props {
+  items: HighlightItem[];
+  id?: string;
+  startIndex?: number;
+}
+
+const {
+  items,
+  id = `highlights-${Math.random().toString(36).slice(2, 9)}`,
+  startIndex = 0,
+} = Astro.props;
+---
+
+<div class="hl" id={id} data-start={startIndex}>
+
+  <div class="hl-track">
+    {items.map((item, i) => (
+      <div
+        class="hl-item"
+        data-index={i}
+        data-href={item.href}
+        data-title={item.title}
+        data-description={item.description}
+        data-category={item.category}
+        role="button"
+        tabindex={i === startIndex ? '0' : '-1'}
+        aria-label={item.title}
+      >
+        <img
+          src={item.thumbnail}
+          alt={item.alt ?? item.title}
+          loading={i === startIndex ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+        <!-- hover overlay on the center card only -->
+        <div class="hl-visit" aria-hidden="true">Visit ↗</div>
+      </div>
+    ))}
+  </div>
+
+  <!-- animated info panel for whichever card is current -->
+  <div class="hl-info" aria-live="polite">
+    <span class="hl-category-label"></span>
+    <h3 class="hl-title"></h3>
+    <p class="hl-desc"></p>
+    <a class="hl-link" href="#" target="_blank" rel="noopener noreferrer">View ↗</a>
+  </div>
+
+  <div class="hl-controls">
+    <button class="hl-btn prev" type="button" aria-label="Previous highlight">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="hl-btn next" type="button" aria-label="Next highlight">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+</div>
+
+<style>
+  .hl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* ── track ─────────────────────────────────────────────────────────── */
+  .hl-track {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 90%;
+    height: clamp(160px, 35vw, 380px);
+  }
+
+  /* ── items ─────────────────────────────────────────────────────────── */
+  .hl-item {
+    position: absolute;   /* hidden by default */
+    flex: 0 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    height: 55%;
+    opacity: 0;
+    transform: scale(0.8);
+    filter: brightness(0.6);
+    transition:
+      height   0.35s ease,
+      opacity  0.35s ease,
+      transform 0.35s ease,
+      filter   0.35s ease;
+    outline: none;
+  }
+
+  .hl-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;  /* let clicks reach the div */
+  }
+
+  /* "Visit ↗" overlay — fades in on hover of the current card */
+  .hl-visit {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  .hl-item.is-current:hover .hl-visit { opacity: 1; }
+
+  /* ── distance states ──────────────────────────────────────────────── */
+  .hl-item.is-current {
+    position: relative;
+    height: 100%;
+    max-width: 80%;
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+    z-index: 5;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  }
+  .hl-item.is-medium {
+    position: relative;
+    height: 72%;
+    max-width: 35%;
+    opacity: 0.85;
+    transform: scale(1);
+    filter: brightness(0.65);
+    z-index: 4;
+  }
+  .hl-item.is-small {
+    position: relative;
+    height: 50%;
+    max-width: 25%;
+    opacity: 0.55;
+    transform: scale(1);
+    filter: brightness(0.45);
+    z-index: 3;
+  }
+
+  .hl-item:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  /* ── info panel ───────────────────────────────────────────────────── */
+  .hl-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    max-width: 540px;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .hl-info.is-fading {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  .hl-category-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 999px;
+    padding: 2px 10px;
+    opacity: 0.85;
+  }
+  .hl-title {
+    font-size: 1.1rem;
+    margin: 4px 0 0;
+  }
+  .hl-desc {
+    font-size: 0.9rem;
+    color: var(--ink);
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .hl-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--blue);
+    text-decoration: none;
+    margin-top: 2px;
+  }
+  .hl-link:hover { text-decoration: underline; }
+
+  /* ── controls ─────────────────────────────────────────────────────── */
+  .hl-controls {
+    display: flex;
+    gap: 30px;
+  }
+  .hl-btn {
+    display: inline-flex;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #eee;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .hl-btn:hover  { background: #ddd; }
+  .hl-btn:active { transform: scale(0.92); }
+
+  @media (max-width: 480px) {
+    .hl-btn { width: 34px; height: 34px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hl-item, .hl-info, .hl-visit { transition: none; }
+  }
+</style>
+
+<script>
+  class Highlights {
+    root:       HTMLElement;
+    items:      HTMLElement[];
+    infoEl:     HTMLElement;
+    categoryEl: HTMLElement;
+    titleEl:    HTMLElement;
+    descEl:     HTMLElement;
+    linkEl:     HTMLAnchorElement;
+    index:      number;
+    initialized: boolean;
+
+    static MEDIUM_RANGE  = 1;
+    static VISIBLE_RANGE = 2;
+
+    constructor(root: HTMLElement) {
+      this.root        = root;
+      this.items       = Array.from(root.querySelectorAll('.hl-item'));
+      this.infoEl      = root.querySelector('.hl-info')!;
+      this.categoryEl  = root.querySelector('.hl-category-label')!;
+      this.titleEl     = root.querySelector('.hl-title')!;
+      this.descEl      = root.querySelector('.hl-desc')!;
+      this.linkEl      = root.querySelector<HTMLAnchorElement>('.hl-link')!;
+      this.index       = Number(root.dataset.start) || 0;
+      this.initialized = false;
+
+      this.items.forEach((item) => {
+        this.applyNaturalRatio(item);
+
+        item.addEventListener('click', () => {
+          if (item.classList.contains('is-current')) {
+            window.open(item.dataset.href, '_blank', 'noopener,noreferrer');
+          } else {
+            this.go(Number(item.dataset.index));
+          }
+        });
+
+        // keyboard support
+        item.addEventListener('keydown', (e: KeyboardEvent) => {
+          if (e.key !== 'Enter' && e.key !== ' ') return;
+          e.preventDefault();
+          if (item.classList.contains('is-current')) {
+            window.open(item.dataset.href, '_blank', 'noopener,noreferrer');
+          } else {
+            this.go(Number(item.dataset.index));
+          }
+        });
+      });
+
+      root.querySelector('.hl-btn.next')!
+          .addEventListener('click', () => this.go(this.index + 1));
+      root.querySelector('.hl-btn.prev')!
+          .addEventListener('click', () => this.go(this.index - 1));
+
+      this.render();
+      this.initialized = true;
+    }
+
+    applyNaturalRatio(item: HTMLElement) {
+      const img = item.querySelector<HTMLImageElement>('img')!;
+      const apply = () => {
+        if (img.naturalWidth && img.naturalHeight) {
+          item.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+        }
+      };
+      if (img.complete && img.naturalWidth > 0) apply();
+      else img.addEventListener('load', apply, { once: true });
+    }
+
+    go(i: number) {
+      const count = this.items.length;
+      this.index  = (i + count) % count;
+      this.render();
+    }
+
+    updateInfo() {
+      const current = this.items[this.index];
+      this.categoryEl.textContent = current.dataset.category    ?? '';
+      this.titleEl.textContent    = current.dataset.title       ?? '';
+      this.descEl.textContent     = current.dataset.description ?? '';
+      this.linkEl.href            = current.dataset.href        ?? '#';
+    }
+
+    render() {
+      const count = this.items.length;
+
+      this.items.forEach((item, i) => {
+        item.classList.remove('is-current', 'is-medium', 'is-small');
+        item.tabIndex = -1;
+        item.setAttribute('aria-label', item.dataset.title ?? '');
+
+        let dist = Math.abs(i - this.index);
+        dist = Math.min(dist, count - dist);
+
+        if (dist === 0) {
+          item.classList.add('is-current');
+          item.tabIndex = 0;
+          item.setAttribute('aria-label', `Visit: ${item.dataset.title}`);
+        } else if (dist <= Highlights.MEDIUM_RANGE) {
+          item.classList.add('is-medium');
+        } else if (dist <= Highlights.VISIBLE_RANGE) {
+          item.classList.add('is-small');
+        }
+      });
+
+      // First render: no fade
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!this.initialized || reducedMotion) {
+        this.updateInfo();
+        return;
+      }
+
+      // Subsequent renders: fade out → update → fade in
+      this.infoEl.classList.add('is-fading');
+      setTimeout(() => {
+        this.updateInfo();
+        this.infoEl.classList.remove('is-fading');
+      }, 180); // matches the 0.18s transition
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.hl').forEach(
+    (el) => new Highlights(el),
+  );
+</script>
