@@ -1,12 +1,13 @@
 ---
 const links = [
   { href: '/portfolio', label: 'Back to work!' },
+
 ];
 ---
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#intro"> &#x1F3AE Gwyn</a>
+    <a class="brand" href="#intro"> Hobbies!</a>
     <nav class="links" aria-label="Section navigation">
       {links.map((l) => (
         <a href={l.href}>{l.label}</a>
@@ -20,7 +21,7 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 20;
-    background: #e1f1fd;
+    background: #f5f4d2;
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--line);
   }
@@ -34,7 +35,7 @@ const links = [
   .brand {
     font-family: var(--font-display);
     font-weight: 700;
-    color: var(--blue-deep);
+    color: #352e23;
     text-decoration: none;
     letter-spacing: 0.02em;
   }

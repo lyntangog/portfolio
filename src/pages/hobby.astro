@@ -9,12 +9,12 @@ import Footer from '../components/Footer.astro';
 import Gallery from '../components/Gallery.astro';
 ---
 
-<Layout title="Gwyn Tangog">
+<Layout title="Gwendolyn Tangog">
   <NavH />
   <HeroH />
 
-  <Section id="VisualArts" eyebrow="" title="&#9998 Traditional Art">
-    <p>I started out overwhelmed by colors, so I started by taking traditional graphite pencil lessons online! &#128221</p>
+  <Section id="VisualArts" eyebrow="" title="Paintings">
+    <p>I reference other paintings or create my own and use it as a way to relax or pass the time.</p>
 
       <Gallery images={[
         {src: `${import.meta.env.BASE_URL}/assets/trad_art/broken_tree.jpeg`, alt: "Broken Tree", subcaption:"Inspired by an image I saw, and it got me back into drawing! 🌳"},
@@ -30,9 +30,8 @@ import Gallery from '../components/Gallery.astro';
 
 
 
-  <Section id="DigitalArts" eyebrow="" title="&#128396 Digital Art">
-    <p>I got inspired by an art trend going around on YouTube where artists would draw their favorite
-    characters in their style. That was my first digital project! </p>
+  <Section id="DigitalArts" eyebrow="" title="Oil Pastels">
+    <p>I've only started exploring oil pastels recently, but here are some of my works! </p>
 
     <Gallery images={[
       {src: `${import.meta.env.BASE_URL}/assets/digital_art/motivational_gwyn.png`, alt: "Mini mascot", subcaption: "A mini mascot of myself. 😎"},
@@ -44,9 +43,8 @@ import Gallery from '../components/Gallery.astro';
 
   </Section>
 
-   <Section id="Crochet" eyebrow="" title="&#x1F9F6 Crochet">
-    <p>Got back into it after a few years since I wanted to make a plushie of my mochi
-    character. &#x1F361 I like soft things.</p>
+   <Section id="Crochet" eyebrow="" title="Lego">
+    <p>I used to never like playing with Lego, but the last few years I've been obsessed.</p>
 
     <Gallery images={[
       {src: `${import.meta.env.BASE_URL}/assets/crochet/crochet_mochi_2.jpeg`, alt: "Mochi", subcaption: "My little mochi mascot. I crocheted him to life. 🍡"},
@@ -57,35 +55,12 @@ import Gallery from '../components/Gallery.astro';
       {src: `${import.meta.env.BASE_URL}/assets/crochet/crochet_cats.jpeg`, alt: "Cats",subcaption:"Little crochet cats! 🐈🐈‍⬛"},
     ]} />
 
-  </Section>
 
-   <Section id="Pokemon Cards" eyebrow="" title="&#127922 Pokemon Cards">
-    <p>I started out collecting the cards a few months ago, then got into the game shortly after.
-    I enjoy strategy games, and this reminds me of being excited to play chess after school in
-    elementary school. &#x1F389; I collect full arts of steel types and ghost types, and I currently
-    play two different decks: Dragapult &#x1F432 &#128053 and Mega Venusaur  &#x1F33F &#x2600;&#xFE0F.</p>
-
-   <Gallery images={[
-      {src: `${import.meta.env.BASE_URL}/assets/pokemon/mega_venusaur.jpeg`, alt: "Mega Venusaur", subcaption: "Not one of the strongest decks, but super fun to play with! No thoughts, only jungle dump. 🪴☀"},
-      {src: `${import.meta.env.BASE_URL}/assets/pokemon/dragapult_dusk.jpeg`, alt: "Daragapult Ex", subcaption: "The current meta deck. I play these during locals to keep up, since my area is pretty competitive. 🐉" },
-      {src: `${import.meta.env.BASE_URL}/assets/pokemon/Lyn_michi.jpeg`, alt: "Michi method binder", subcaption: "My sister doesn't play the game, but likes cute cards, so I prepared a michi method binder for her. 🌟 The Michi method is art of creating decorative binders with pictures. 📷"},
-    ]} />
 
   </Section>
 
-  <Section id="Music" eyebrow="" title="&#127908 Music">
-    <p>Even though I really wanted to sing, I learned to play fingerstyle guitar because I was insecure of my voice.
-    Over time, I overcame the insecurity, and I have performed as vocalist and guitarist multiple times!</p>
-
-    <Gallery images={[
-      {video: 'https://youtu.be/fsFrOO7gnws', alt: "Ghost of You", subcaption: "One of the songs that got me into singing while playing the guitar. 👻"},
-      {video: 'https://youtu.be/C-I3s_9D1g0', alt: "Message in a Bottle", subcaption: "First time performing without a guitar. 🚢"},
-    ]} />
-
-  </Section>
-
-   <Section id="Others" eyebrow="" title="&#9823 Others">
-    <p>I also like playing video games and writing poetry, but there aren't any interesting pictures for those.</p>
+   <Section id="Others" eyebrow="" title="Others">
+    <p>I love dancing, singing, video games, boredgames, and playing the ukulele when I'm bored!</p>
 
   <Gallery images={[
       {src: `${import.meta.env.BASE_URL}/assets/others/monopoly.jpeg`, alt: "Monopoly", subcaption: "Won the capitalism simulation game. 💰"},

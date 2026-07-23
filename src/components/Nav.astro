@@ -2,16 +2,17 @@
 const links = [
   { href: '#intro', label: 'Intro' },
   { href: '#education', label: 'Education' },
-  { href: '#industry', label: 'Industry' },
-  { href: '#research', label: 'Research' },
   { href: '#leadership', label: 'Leadership' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#initiative', label: 'Initiatives' },
   { href: '#awards', label: 'Awards' },
+  {href: '#folder-links', label: 'Resume & LinkedIn'},
 ];
 ---
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#intro"> &#x1F4BB Gwyn Tangog</a>
+    <a class="brand" href="#intro">Gwendolyn Tangog</a>
     <nav class="links" aria-label="Section navigation">
       {links.map((l) => (
         <a href={l.href}>{l.label}</a>
@@ -25,7 +26,7 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 20;
-    background: #e1f1fd;
+    background: #3e2f24;
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--line);
   }
@@ -39,7 +40,7 @@ const links = [
   .brand {
     font-family: var(--font-display);
     font-weight: 700;
-    color: var(--blue-deep);
+    color: var(--green);
     text-decoration: none;
     letter-spacing: 0.02em;
   }
@@ -49,13 +50,13 @@ const links = [
     flex-wrap: wrap;
   }
   .links a {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.82rem;
-    color: var(--ink);
+    color: #F6F0E6;
     text-decoration: none;
   }
   .links a:hover {
-    color: var(--blue);
+    color: var(--green-dark);
   }
   @media (max-width: 640px) {
     .nav-inner {

@@ -1,18 +1,21 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 
 :root {
   /* Color tokens */
-  --ink: #233244;
-   --bg: #eef7ff;
+  --ink: #3e2f24;
+  --bg: #eaf5ea;
   --bg-panel: #ffffff;
-  --bg-alt: #dfe8f2;
+  --bg-alt: #dcefdd;
 
-  /* Blues */
-  --blue: #6aa8ff;
-  --blue-dark: #3b6ea8;
-  --blue-light: #d7ebff;
+  /* Greens (pastel) */
+  --green: #a9d8ad;
+  --green-dark: #6fa876;
+  --green-light: #eaf5ea;
+  --green-pale: #d9ecda;
+
+  /* Cream (alternate background) */
+  --bg-cream: #f5f6ee;
+  --cream-dot: #F6F0E6;
 
   /* Greys */
   --grey-100: #f4f6f8;
@@ -22,13 +25,15 @@
   --grey-700: #435161;
 
   /* Text */
-  --text: #233244;
+  --text: #3e2f24;
+  --brown-deep: #3e2f24;
 
   /* Accent */
   --yellow: #ffd166;
+
   /* Type tokens */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: 'Cabin', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Layout */
@@ -58,36 +63,39 @@ html {
 body {
   margin: 0;
   background: var(--bg);
-  background-color:var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  background-image: radial-gradient(
-    #d9eeff 1px,
-      transparent 1px);
-  background-size:24px 24px;
+  background-image: radial-gradient(var(--green-pale) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+body.bg-cream {
+  background: var(--bg-cream);
+  background-image: radial-gradient(var(--cream-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  color: var(--blue-deep);
+  color: var(--brown-deep);
   line-height: 1.15;
   margin: 0 0 0.5em;
 }
 
 a {
-  color: var(--blue);
-  text-decoration-color: var(--blue-pale);
+  color: var(--green-dark);
+  text-decoration-color: var(--green-pale);
   text-underline-offset: 3px;
 }
 a:hover {
-  color: var(--blue-deep);
+  color: var(--brown-deep);
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 2px solid var(--yellow);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -99,11 +107,11 @@ button:focus-visible {
 }
 
 .eyebrow {
-  font-family: var(--font-pixel);
+  font-family: var(--font-body);
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--green-dark);
 }
 
 .btn {
@@ -111,51 +119,63 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-pixel);
+  font-family: var(--font-body);
   font-size: 0.85rem;
   padding: 10px 18px;
   border-radius: var(--radius);
   border: 3px solid var(--grey-500);
-  color: var(--blue-deep);
+  color: var(--brown-deep);
   background: transparent;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 .btn:hover {
-  box-shadow: 8px 8px 0 var(--blue-light);
-  transform:translateY(2px);
-  background: var(--blue-deep);
+  box-shadow: 8px 8px 0 var(--green-pale);
+  background: var(--brown-deep);
   color: #fff;
   transform: translateY(-1px);
 }
 .btn.solid {
-  background: var(--blue-deep);
+  background: var(--brown-deep);
+  color: #fff;
 }
 .btn.solid:hover {
-  background: var(--blue);
+  background: var(--green-dark);
 }
 
 .chip {
   display: inline-block;
-  font-family: var(--font-pixel);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   padding: 3px 10px;
   border-radius: 999px;
-  background: var(--blue-pale);
-  color: var(--blue-deep);
+  background: var(--green-pale);
+  color: var(--brown-deep);
   margin: 0 6px 6px 0;
 }
 
 .card {
-  transition:.15s;
+  transition: .15s;
   background: var(--bg-panel);
   border: 3px solid var(--grey-500);
   border-radius: var(--radius);
   padding: 20px 22px;
 }
 
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:
-  8px 8px 0 rgba(47,95,167,.2);
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0 rgba(111, 168, 118, .2);
+}
+
+#education,
+#leadership,
+#awards {
+  background: var(--bg);
+}
+
+#experience,
+#initiative {
+  background: var(--bg-cream);
+  background-image: radial-gradient(var(--cream-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
 }

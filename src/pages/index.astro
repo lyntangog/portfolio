@@ -8,212 +8,236 @@ import TimelineItem from '../components/TimelineItem.astro';
 import Footer from '../components/Footer.astro';
 import Gallery from '../components/Gallery.astro';
 import Highlights from '../components/Highlights.astro';
-
+import FolderLinks from '../components/FolderLinks.astro';
+import StatCard from "../components/StatCard.astro";
 ---
 
-<Layout title="Gwyn Tangog">
-  <Nav />
-  <Hero />
 
-  <Section id="highlights" eyebrow="00 / " title="Highlights and Featured Work">
-    <Highlights items={[
-    {
-    category: 'Teaching',
-    title: 'Teaching Assistant',
-    description: 'Holding a review session.',
-    thumbnail: '',
-    href: '',},
-    {
-    category: 'Research',
-    title: 'Teaching Assistant',
-    description: 'Holding a review session.',
-    thumbnail: '',
-    href: '',},
-    {
-    category: 'Research and Programming',
-    title: 'Teaching Assistant',
-    description: 'Holding a review session.',
-    thumbnail: '',
-    href: '',},
-  ]} />
-  </Section>
+
+<Layout title="Gwendolyn Tangog">
+  <Nav />
+  <Hero /> 
+  <FolderLinks />
+
+ <Section id="highlights" eyebrow="00 / " title="Highlights">
+<div style="display: flex; justify-content: center;">
+  <div style="width: 350px;">
+    <StatCard value="190" label="People Reached" accent="#3e2f24" />
+  </div>
+</div>
+<p> Through my own initiatives and my collaborations, I have been able to work towards my passion of helping others and making a positive impact in my community!</p>
+</Section>
 
   <Section id="education" eyebrow="01 / " title="Education">
     <Timeline>
-      <TimelineItem date="2027" title="M.Eng. in Computer Science" org="Massachusetts Institute of Technology" badges={['GPA: 5.0/5.0']} toggleLabel="Courses and Details">
-        <p>This journey is currently in progress. More info coming soon!</p>
+      <TimelineItem date="2028" title="International Baccalaureate" org="Southville International School and Colleges" toggleLabel="Courses and Details">
+        <p>This journey is currently in progress.</p>
+        <p>HL:</p>
+        <p>Chemistry, Biology, Psychology</p>
+        <p>SL:</p>
+        <p>Math AA, English Lang & Lit, Spanish Ab Initio</p>
       </TimelineItem>
-      <TimelineItem date="2026" title="B.S. in Computer Science and Engineering & Mathematics" org="Massachusetts Institute of Technology" toggleLabel="Courses and Details"
-      badges={['GPA: 4.8 / 5.0', 'HKN Honor Society']}>
-        <p>As a major in computer science and engineering, I have beckground in software development and systems. My concentrations were in machine learning and theoretical computer science.</p>
-        <p>Software Engineering: 6.1020 (Software Construction), 6.1800 (Computer Systems Engineering)</p>
-        <p>ML & AI: 6.3900 (Machine Learning), 6.8301 (Computer Systems and Engineering)</p>
-        <p>Theoretical Computer Science: 6.1220 (Design and Analysis of Algorithms), 18.405 (Advanced Complexity Theory), 6.5350 (Matrix Multiplication and Graph Alogrithms)</p>
-        <p>Math: 18.03 (Differential Equations), 18.06 (Linear Algebra), 18.04 (Complex Variables with Applications), 18.600 (Probability and Random Variables), 18.781 (Theory of Numbers)</p>
-      </TimelineItem>
-      <TimelineItem date="2022" title="International Baccalaureate Diploma" org="Southvile International School and Colleges"
-      badges={['Grade: 41/45']} toggleLabel="Courses and Details">
-        <p>Classes taken: Math AA HL, Chemistry HL, Physics HL, Business Management SL, English Lang & Lit SL, Spanish Ab Initio</p>
+      <TimelineItem date="2026" title="K-10 Basic Education" org="Southville International School and Colleges" toggleLabel="Details">
+        <p>Top 30 students in the year</p>
       </TimelineItem>
     </Timeline>
   </Section>
 
-  <Section id="industry" eyebrow="02 / " title="Industry Experience">
+  <Section id="experience" eyebrow="02 / " title="Experience">
     <Timeline>
-      <TimelineItem date="June 2024 - August 2024" title="Implementation Engineer Intern" org="Recidiviz"
-      highlights={[{label: 'Ream my article here!', href: "https://pkgcenter.mit.edu/social-impact-internships-gwyn-margaux-tangog-26/"}]}
-      skills={['Python', 'Pandas', 'Matplotlib', 'Github', 'PostgreSQL', 'SQL']}>
-        <p>I created raw data views and ingested raw data into the system for usage downstream.
-          I also took the initiative to propose and implement schema changes that
-          improved the organization and usability of data downstream. </p>
-      </TimelineItem>
-      <TimelineItem date="January 2024" title="Data and Tech Intern" org="The Engine Room"
-      highlights={[{label: 'Ream my article here!', href: "https://pkgcenter.mit.edu/social-impact-internships-gwyneth-margaux-tangog-26/"}, {label: 'My Github repo!', href: "https://github.com/gwyntangog/LITS_data_analytics"}]}
-      skills={['Python', 'Pandas', 'Matplotlib', 'Github', 'Render', 'Dash']}>
-        <p> Performed data analysis on recent reporting data from the Light Touch Support program.
-          Wrote automation scripts for repetitive data analysis tasks. Made and deployed an interactive data analysis dashboard.
+      <TimelineItem date="July 2026 - present" title="General Member" org="Neurosphere"
+      skills={['Research', 'Digital Design']}>
+        <p> I create informative digital booklets on topics related to neuroscience and psychology.
         </p>
       </TimelineItem>
+        <TimelineItem date="July 2026 - present" title="Summer Research Cohort" org="Little Hearts Foundation" location="Greater Toronto Area, Canada"
+      skills={['Remote', 'Research', 'Communication', 'Collaboration']}>
+        <p> The mission is to create an informational manual on medical related topics/concerns accessible for all but directed to pediatrics.
+        </p>
+      </TimelineItem>
+        <TimelineItem date="July 2026 - present" title="SEVAH Pediatric Neuroinclusion Fellowship" org="Sevah Neuro" location="CA, United States"
+      skills={['Remote', 'Research', 'Communication', 'Collaboration']}>
+        <p> Interact with neuroimpaired children and work on a neurscience/pediatric related research paper. </p>
+      </TimelineItem>
+       <TimelineItem date="June 2026 - present" title="Marketing and Outreach Intern" org="Empathy in Medicine Initiative" location="NY, United States"
+      skills={['Remote','Digital Design', 'Communication', 'Research']}>
+        <p>I create marketing materials (eg. informational posts) and draft/connect for outreach opportunities </p>
+      </TimelineItem>
+      <TimelineItem date="July 2026" title="Volunteer" org="Mind4Youth" location="CA, United States"
+      skills={['Asynchronous','Design']}>
+        <p>I created cards for children in hospitals and studied lessons and modules centered around psychology provided</p>
+      </TimelineItem>
     </Timeline>
   </Section>
 
-  <Section id="research" eyebrow="03 /" title="Research">
+  <Section id="leadership" eyebrow="03 /" title="Leadership">
     <p>
-      While figuring out my research focus, I explored theoretical computer science, sustainability, and economics.
+      Leadership experiences I have had through highschool
     </p>
     <Timeline>
-      <TimelineItem date="June 2026 – current" title="Modeling Copper Substitution" org="MIT Materials Sustainability Lab"
-      highlights={['⭐ Main Contributor']}
-      skills={['AI', 'Python', 'Pandas', 'Matplotlib']}
-      toggleLabel="About the project">
+      <TimelineItem date="2025- present" title="Core Secretary" org="The Kindness Project" location="Southville International School and Colleges"
+      highlights={['Co-Founder']}
+      skills={['Facilitator', 'Tutor', 'Psychology', 'Advocacy']}
+      toggleLabel="About">
         <p>
-          Writing programs and building a UI to moddle how the market share of copper changes
-          as aluminum price, copper price, and price ratios change.
-        </p>
+         The Kindness Project aims to promote kindness and empathy in the school. We focus on mental health and have three divisions. </p>
+        <p>Kindness Campaign: Focus on advocacy for mental health awareness and support.</p>
+        <p>Peer Mentors': Provides support to the studednt body through Peer Tutoring for academics and Facilitating for mental health.</p>
+        <p>Psychology Society: Organizes discussions on psychology topics such as disorders and concepts.</p>
       </TimelineItem>
-      <TimelineItem date="February 2026 – May 2026" title="Alogrithms Wiki" org="MIT Future Tech"
-      highlights={['🙌 Collaborator']}
-      skills={['Algorithms', 'Complexity', 'Proofs']}
-      toggleLabel="About the project">
+      <TimelineItem date="2025 – present" title="Research Head" org="Red Cross Youth" location="Southville International School and Colleges"
+      skills={['Research', 'Advocacy']}
+      toggleLabel="About">
         <p>
-          Contributed to the Algorithms Wihi by surveying algorithms textbooks for problems.
+        Gathered information and researched on the events of natural disasters happening in the Philippines and special days regarding the environment to be posted onto our Red Cross Youths social media account.
         </p>
-      </TimelineItem>
-      <TimelineItem date="June 2025 – December 2025" title="Counting Complexity of Solo Chess" org="MIT Theory of Computation"
-      highlights={['⭐ Main Contributor']}
-      skills={['Algorithms', 'Complexity', 'Proofs']}
-      toggleLabel="About the project">
-        <p>
-          Proved ASP-completeness via reductions from Hamiltonian paths and
-          Knight's Tours, and generalized the result to several fairy pieces.
-          Drafted a manuscript.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="Janury 2025 – May 2025" title="Hardness of Graph Threading in Grid Graphs" org="MIT Theory of Computation"
-      highlights={['🙌 Collaborator']}
-      skills={['Algorithms', 'Complexity Analysis', 'Proofs']}
-      toggleLabel="About the project">
-        <p>
-          Studied the grid-graph case of Graph Threading; found a
-          polynomial-time algorithm for a special case while investigating
-          NP-hardness.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="June 2024 – August 2024" title="Analysis of the impact of automaker strategies on lithium price elasticity using a novel bottom-up demand model" org="MIT Concrete Sustainability Hub"
-      highlights={['🙌 Collaborator',{label: 'Published Paper', href: "https://doi.org/10.1016/j.resconrec.2025.108477"}]}
-      skills={['Python', 'Pandas','Matplotlib']}
-      toggleLabel="About the project">
-        <p>
-          Contributed literature review and improved graphing via Python.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="February 2024 – May 2024" title="Assessment of Gamification Data to inform Concrete Delivery Professional Shortage" org="MIT Concrete Sustainability Hub"
-      highlights={['⭐ Main Contributor', {label:'Research Poster', href:"https://drive.google.com/file/d/1RqNX0FYlklpnejkK-74roY5JqA5cg5Tj/view"}]}
-      skills={['Python', 'Pandas', 'Matplotlib', 'Survey Writing']}
-      toggleLabel="About the project">
-        <p>
-          Analyzed driver productivity and retention data with Python;
-          presented a research poster to industry stakeholders.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="August 2024 – January 2024" title="Modeling Carbon Uptake" org="MIT Concrete Sustainability Hub"
-      highlights={['⭐ Main Contributor', {label:'Research Poster', href:"https://drive.google.com/file/d/1OfOODrRrusjJKFxdST8uftOiSRQCJJMI/view"},
-      {label: 'Research Brief', href: "https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/a/1711/files/2026/05/26.05.13-Site-Specific-Uptake.pdf"}]}
-      skills={['Python', 'Pandas', 'Matplotlib']}
-      toggleLabel="About the project">
-        <p>
-        Analyzed data from several concrete companies who use gamification to measure
-        the impacts of gamification on driver productivity, retention, and recruitment using Python.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="June 2023 – August 2023" title="Heterogeneity of Child Penalty" org="MIT Economics Department"
-      highlights={['🙌 Collaborator']}
-      skills={['STATA']}
-      toggleLabel="About the project"
-      >
-        <p>Reviewed related literature and modeled trends in STATA.</p>
-      </TimelineItem>
-      <TimelineItem date="June 2023 – August 2023" title="Effects of Reducing Gastroenterology Capacity" org="MIT Economics Department"
-      highlights={['🙌 Collaborator']}
-      skills={['Python', 'Pandas', 'Matplotlib']}
-      toggleLabel="About the project">
-        <p>Analyzed and cleaned data using Python.</p>
       </TimelineItem>
     </Timeline>
   </Section>
 
-  <Section id="leadership" eyebrow="04 /" title="Leadership, Teaching, and Mentorship">
+  <Section id="initiative" eyebrow="04 /" title="Initiatives">
+    <p>Initiatives and projects I have created or assisted in </p>
     <Timeline>
-      <TimelineItem date="September 2024 – May 2026" title="Teaching Assistant (Math for Computer Science)" org="MIT EECS Department"
-      highlights={[{label: "Watch me hold a review session here!", href: "https://www.youtube.com/watch?v=djMiglg9qqw"}]}
+      <TimelineItem date="Created 2025" title="Kindness Playshop" org="The Kindness Project"
+      highlights={['Project Lead and Creator']}
       >
-        <p>Ran a recitation section of 10-20 students where I prove concept reviews and space for problem-solving and receiving feedback.
-          In my first semester as a TA, I took the initiative to start hosting review sessions for students before midterms.</p>
+        <p>I created a yearly workshop for preschool students to promote kindness, empathy, managing emotions for themselves and how it affects others.</p>
       </TimelineItem>
-      <TimelineItem date="June 2025 - August 2025" title="Interphase Edge Residential Facilitator (Teaching Assistant and Counselor)" org="MIT Office of Minority Education">
-        <p>As a TA, I ran a recitation section of 12 in-person students and online recitation of 20 students. I also held office hours and graded assessments for the class Calculus 2.
-          I took the initiative to standardize TA material on Overleaf for future TA's to use.</p>
+      <TimelineItem date="May 2026" title="Healthy Minds, Clean Hands" org="Collaborative Self Project">
+        <p>Hosted a workshop with informal settlers aged 13 and below on how to take care of themselves mentally and physically during natural disasters and hygiene as it was a frequent occurance at that time.</p>
+        <p>I self curated my own hygiene kits and gave it to the kids as a token after the workshop.</p>
       </TimelineItem>
-      <TimelineItem date="2024 – 2025" title="International Orientation Coordinator" org="MIT International Students Office">
-        <p>Coordinated events for incoming international students; designed the orientation photobook.</p>
-      </TimelineItem>
-      <TimelineItem date="Feb 2023 – Dec 2024" title="Resident Peer Mentor" org="MIT McCormick Hall">
-        <p>Organized study breaks and provide mentorship to firstyears in my dorm from anything to classes and friendships to clubs and hobbies.</p>
-      </TimelineItem>
-      <TimelineItem date="June 2016 - May 2022" title="Competitive Math Trainer" org="Southville International School and Colleges">
-        <p>Took the initiative to train schoolmates for math competitions by teaching from the textbooks and materials I studied.
-          This successfully influenced more students to participate in math contests!
-        </p>
+      <TimelineItem date="February 2026" title="First-aid Seminar" org="Red Cross Youth > Southville International School and Colleges">
+        <p>Assisted in a first-aid seminar in International Baccalaureate in collaboration with their club. We helped the students learn basic bandaging techniques and what to do when in risk of rabies.</p>
       </TimelineItem>
     </Timeline>
   </Section>
 
   <Section id="awards" eyebrow="05 /" title="Awards">
-    <Timeline>
-      <TimelineItem date="2026" title="Eta Kappa Nu Honor Society" org="Massachusetts Institute of Technology">
-        <p>I was officially inducted in the spring of 2026 for my high grades and contributions (social impact internships).
-          Only students in the top third of their computer science class are invited.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="2024" title="Outstanding UROP (Undergraduate Research Opportunity) Student Award" org="Massachusetts Institute of Technology">
-        <p>My advisor nominated me since I led two projects that academic year and presented research posters to industry stakeholders
-          for both of them. In the fall, I worked on modeling the carbon uptake of crushed concrete. I made code to model it, and
-          released a research brief. In the spring, I analyzed the effect of gamification on the productivity of concrete delivery drivers.
-          I did literature review, made and rolled out surveys, and performed analyses on the data.
-        </p>
-      </TimelineItem>
-      <TimelineItem date="2019" title="China Girls' Math Olympiad - Silver Medalist">
-        <p>I was one of the four women who represented team Philippines that year!</p>
-      </TimelineItem>
-      <TimelineItem date="2019" title="Philippine Math Olympiad National Finalist (Top 22)">
-        <p>I attended Math Olympiad Summer Camp, the Philippines' IMO team selection process.
-          While I was not selected for the team that year, I learned a lot.
-         I was unfortunately unable to continue with this journey due to burnout and the COVID lockdowns.</p>
-      </TimelineItem>
-    </Timeline>
+    <details class="year-group" open>
+      <summary class="year-toggle">
+        <span class="year-label">Academic Year 2025–2026</span>
+        <span class="year-chevron" aria-hidden="true">▾</span>
+      </summary>
+
+      <Timeline>
+        <TimelineItem title="TOEFL" award={['Perfect Scorer']}>
+        </TimelineItem>
+        <TimelineItem title="International Psychology Olympiad" award={['Regional Top 6 Philippines']}>
+          <p> Highest Distinction, Final Round Qualifier</p>
+          <p> Final Round is not yet completed </p>
+        </TimelineItem>
+        <TimelineItem title="Thailand International Biology and Medical Olympiad Challenge Final Round" award={['Gold Medalist']}>
+          <p>Top Scorer</p>
+        </TimelineItem>
+        <TimelineItem title="Hong Kong International Science Olympiad Final Round" award={['Gold Medalist']}>
+        </TimelineItem>
+        <TimelineItem title="Thailand International Biology and Medical Olympiad Challenge Regional Round" award={['Gold Medalist']}>
+        </TimelineItem>
+        <TimelineItem title="Hong Kong International Science Olympiad Heat Round" award={['Gold Medalist']}>
+        </TimelineItem>
+        <TimelineItem title="International Earth Science Olympiad" award={['Gold Medalist']}>
+        </TimelineItem>
+        <TimelineItem title="World Scholar's Cup Manila Round" award={['Silver Medalist']}>
+          <p>Silver Medals: Debate, Scholars' Bowl, Team Debate</p>
+        </TimelineItem>
+        <TimelineItem title="Philippine International Math and Science Olympiad" award={['Bronze Medalist']}>
+        </TimelineItem>
+        <TimelineItem title="Asian Science and Mathematics Olympiad" award={['Bronze Medalist']}>
+        </TimelineItem>
+      </Timeline>
+    </details>
+
+    <details class="year-group">
+      <summary class="year-toggle">
+        <span class="year-label">Academic Year 2024–2025</span>
+        <span class="year-chevron" aria-hidden="true">▾</span>
+      </summary>
+
+      <Timeline>
+        <TimelineItem title="World Scholars Cup Manila Round" award={['Gold Medalist']}>
+          <p>Gold Medals: Creative Writing, Team Writing</p>
+        </TimelineItem>
+        <TimelineItem title="International Brilliant Minds Olympiad" award={['Silver Medalist']}>
+          <p>English</p>
+        </TimelineItem>
+      </Timeline>
+    </details>
   </Section>
-
-
 
   <Footer />
 </Layout>
+
+<style>
+  .year-group {
+    border-bottom: 1px solid var(--grey-300, #c7d2dd);
+    margin-bottom: 8px;
+
+    .stat-card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 44px 32px;
+  border-radius: 32px;
+  background: #f5f6ee;
+  border: 3px solid #f5f6ee;
+  text-align: center;
+  box-shadow: 8px 8px 0 rgba(111, 168, 118, 0.18);
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 700;
+  color: var(--brown-deep);
+  margin: 0 0 8px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  opacity: 0.75;
+  margin: 0;
+  max-width: 260px;
+  margin-inline: auto;
+}
+  }
+
+  .year-toggle {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 4px;
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 1.1rem;
+    color: var(--ink, #233244);
+    user-select: none;
+  }
+
+  .year-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .year-chevron {
+    transition: transform 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  details[open] .year-chevron {
+    transform: rotate(180deg);
+  }
+
+  .year-toggle:hover .year-label {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  details > :global(*:not(summary)) {
+    padding-top: 4px;
+    padding-bottom: 12px;
+  }
+</style>
+

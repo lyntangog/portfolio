@@ -1,0 +1,353 @@
+---
+// FolderLinks.astro
+// A landscape "hanging folder" with labeled divider tabs.
+// Hovering (or tapping) a tab swings the tab(s) in front of it open,
+// like a real folder divider flipping forward to make room.
+//
+// USAGE:
+// ---
+// import FolderLinks from '../components/FolderLinks.astro';
+// ---
+// <FolderLinks />
+// or override the defaults:
+// <FolderLinks tabs={[
+//   { label: 'Resume', type: 'download', href: '/resume.pdf', filename: 'FirstLast-Resume.pdf', description: 'PDF · Updated Jan 2026', cta: 'Download résumé' },
+//   { label: 'LinkedIn', type: 'link', href: 'https://linkedin.com/in/yourname', description: 'linkedin.com/in/yourname', cta: 'View profile' },
+// ]} />
+
+export interface FolderTab {
+  label: string;
+  type: 'download' | 'link';
+  href: string;
+  filename?: string;
+  description?: string;
+  cta?: string;
+}
+
+export interface Props {
+  tabs?: FolderTab[];
+}
+
+const {
+  tabs = [
+    {
+      label: 'My Resume',
+      type: 'download',
+href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-Resume.pdf',
+      description: 'PDF · Updated July 2026',
+      cta: 'Download résumé',
+    },
+    {
+      label: 'LinkedIn',
+      type: 'link',
+      href: 'a',
+      description: 'coming soon!',
+      cta: 'View profile',
+    },
+  ] as FolderTab[],
+} = Astro.props;
+---
+
+<div class="folder" data-count={tabs.length}>
+  <div class="folder-shadow" aria-hidden="true"></div>
+
+  <div class="folder-stack" style={`--count:${tabs.length}`}>
+    {tabs.map((tab, i) => (
+      <div class="folder-panel" data-index={i} style={`--i:${i}`}>
+        <button
+          class="tab-flag"
+          type="button"
+          data-target={i}
+          aria-expanded="false"
+          aria-controls={`panel-body-${i}`}
+        >
+          <span class="tab-flag-label">{tab.label}</span>
+        </button>
+
+        <div class="panel-body" id={`panel-body-${i}`}>
+          <p class="panel-kicker">{tab.type === 'download' ? 'Download' : 'Coming soon!'}</p>
+          <h3 class="panel-title">{tab.label}</h3>
+          {tab.description && <p class="panel-desc">{tab.description}</p>}
+
+          {tab.type === 'download' ? (
+            <a class="panel-cta" href={tab.href} download={tab.filename ?? true}>
+              {tab.cta ?? 'Download'}
+              <span class="panel-cta-icon" aria-hidden="true">↓</span>
+            </a>
+          ) : (
+            <a class="panel-cta" href={tab.href} target="_blank" rel="noopener noreferrer">
+              {tab.cta ?? 'Visit'}
+              <span class="panel-cta-icon" aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .folder {
+    --bg: #eaf5ea;
+    --bg-panel: #ffffff;
+    --ink: #3e2f24;
+    --green: #a9d8ad;
+    --green-dark: #6fa876;
+    --green-pale: #d9ecda;
+    --font-display: Georgia, 'Times New Roman', serif;
+    --font-body: 'Cabin', system-ui, sans-serif;
+
+    position: relative;
+    width: clamp(300px, 90vw, 640px);
+    aspect-ratio: 8 / 5;
+    margin: 40px auto;
+    perspective: 1400px;
+    font-family: var(--font-body);
+    color: var(--ink);
+  }
+
+  .folder-shadow {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: -18px;
+    height: 30px;
+    background: radial-gradient(ellipse at center, rgba(62, 47, 36, 0.22), transparent 70%);
+    filter: blur(4px);
+  }
+
+  .folder-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  .folder-panel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    transform: translate(0, 0);
+    z-index: calc(100 - var(--i));
+    transform-origin: left center;
+    transition: transform 0.45s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.35s ease;
+    will-change: transform;
+    /* Panels are full-size but mostly transparent — without this, an
+       inactive panel's invisible area would still sit on top and silently
+       block clicks/hovers on the tabs and cards beneath it. Only the
+       actual visible controls (tab, card link) opt back in below. */
+    pointer-events: none;
+  }
+
+  .folder-panel.is-infront {
+    transform-origin: bottom center;
+    transform: translateY(calc(72px + var(--i) * 12px)) rotateX(-42deg) scale(0.96);
+    opacity: 0.55;
+    z-index: 5;
+  }
+
+  .folder-panel.is-open {
+    transform: translate(0, -16px) scale(1.015);
+    z-index: 200;
+  }
+
+  /* Tabs are positioned independently of the panel body beneath them, so a
+     later tab (e.g. LinkedIn) is never covered by an earlier panel's card
+     and stays clickable/hoverable at all times. Each tab sits further
+     right than the one before it, tucked slightly under it. */
+  .tab-flag {
+    all: unset;
+    cursor: pointer;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    left: calc(22px + var(--i) * 94px);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px 9px;
+    background: var(--green);
+    border: 2px solid var(--green-dark);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    font-family: var(--font-display);
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    box-shadow: 0 -2px 0 rgba(255, 255, 255, 0.4) inset;
+    transition: background 0.2s ease, left 0.35s cubic-bezier(0.22, 0.9, 0.3, 1);
+  }
+
+  .folder-panel:nth-child(odd) .tab-flag {
+    background: var(--green-pale);
+  }
+
+  .tab-flag:hover,
+  .tab-flag:focus-visible {
+    background: var(--green-dark);
+    color: #fff;
+  }
+
+  .tab-flag:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  /* The active tab pulls flush against the left edge of its card so the
+     two read as one continuous piece instead of a tab floating above a
+     gap. Inactive tabs keep their staggered position, peeking out to the
+     right, tucked behind the active one. */
+  .folder-panel.is-open .tab-flag {
+    left: 0;
+    background: var(--green-dark);
+    color: #fff;
+  }
+
+  .panel-body {
+    position: absolute;
+    inset: 34px 0 0 0;
+    background: var(--bg-panel);
+    border: 2px solid var(--green-dark);
+    border-radius: 0 16px 16px 16px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition: opacity 0.3s ease 0.08s, transform 0.3s ease 0.08s;
+  }
+
+  .folder-panel.is-open .panel-body {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .panel-kicker {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green-dark);
+  }
+
+  .panel-title {
+    margin: 0 0 2px;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--ink);
+  }
+
+  .panel-desc {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    color: color-mix(in srgb, var(--ink) 70%, transparent);
+  }
+
+  .panel-cta {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .panel-cta:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+  }
+
+  .panel-cta-icon {
+    font-size: 1rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .folder-panel,
+    .panel-body,
+    .panel-cta {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .folder {
+      aspect-ratio: 4 / 5;
+    }
+    .tab-flag {
+      left: calc(14px + var(--i) * 72px);
+      padding: 7px 12px 8px;
+      font-size: 0.82rem;
+    }
+    .folder-panel.is-infront {
+      transform: translateY(calc(52px + var(--i) * 10px)) rotateX(-36deg) scale(0.96);
+    }
+  }
+</style>
+
+<script>
+  function initFolders() {
+    document.querySelectorAll<HTMLElement>('.folder').forEach((folder) => {
+      const panels = Array.from(folder.querySelectorAll<HTMLElement>('.folder-panel'));
+      const DEFAULT_INDEX = 0;
+      let lockedIndex: number | null = null;
+
+      const setOpen = (targetIndex: number) => {
+        panels.forEach((panel) => {
+          const i = Number(panel.dataset.index);
+          const flag = panel.querySelector('.tab-flag');
+          panel.classList.remove('is-open', 'is-infront');
+
+          if (i === targetIndex) {
+            panel.classList.add('is-open');
+            flag?.setAttribute('aria-expanded', 'true');
+          } else {
+            flag?.setAttribute('aria-expanded', 'false');
+            if (i < targetIndex) panel.classList.add('is-infront');
+          }
+        });
+      };
+
+      panels.forEach((panel) => {
+        const index = Number(panel.dataset.index);
+        const flag = panel.querySelector<HTMLElement>('.tab-flag');
+        if (!flag) return;
+
+        flag.addEventListener('mouseenter', () => {
+          if (lockedIndex === null) setOpen(index);
+        });
+        flag.addEventListener('focus', () => setOpen(index));
+        flag.addEventListener('blur', () => {
+          if (lockedIndex === null) setOpen(DEFAULT_INDEX);
+        });
+
+        // Tap-to-lock support for touch devices: tap opens and holds a tab
+        // open; tapping the already-open tab returns to the default.
+        flag.addEventListener('click', () => {
+          lockedIndex = lockedIndex === index ? null : index;
+          setOpen(lockedIndex ?? DEFAULT_INDEX);
+        });
+      });
+
+      folder.addEventListener('mouseleave', () => {
+        if (lockedIndex === null) setOpen(DEFAULT_INDEX);
+      });
+
+      setOpen(DEFAULT_INDEX);
+    });
+  }
+
+  document.addEventListener('astro:page-load', initFolders);
+  initFolders();
+</script>

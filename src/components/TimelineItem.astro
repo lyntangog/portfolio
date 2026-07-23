@@ -3,24 +3,28 @@
 type Highlight = string | { label: string; href: string };
 
 interface Props {
-  date: string;
+  date?: string;
   title: string;
   org?: string;
   toggleLabel?: string;
   badges?: string[];
   highlights?: Highlight[];   // ← was string[]
   skills?: string[];
+  location?: string;
+  award?: string[];
 }
 
-const { date, title, org, toggleLabel = 'More info', badges, highlights, skills } = Astro.props;
+const { date, title, org, toggleLabel = 'More info', badges, highlights, skills, location, award } = Astro.props;
 const hasBody = Astro.slots.has('default');
 ---
 
 <article class="item">
   <span class="node" aria-hidden="true"></span>
-  <p class="date">{date}</p>
+  {date && <p class="date">{date}</p>}
   <h3>{title}</h3>
   {org && <p class="org">{org}</p>}
+  {location && <p class="location">{location}</p>}
+  {award && award.length > 0 && <p class="award">{award.join(', ')}</p>}
 
   {badges && badges.length > 0 && (
     <ul class="badges">
@@ -91,6 +95,20 @@ const hasBody = Astro.slots.has('default');
     margin: 0 0 2px;
   }
   .org {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink);
+    opacity: 0.7;
+    margin: 0 0 10px;
+  }
+  .location {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink);
+    opacity: 0.7;
+    margin: -10px 0 10px;
+  }
+  .award {
     font-family: var(--font-mono);
     font-size: 0.82rem;
     color: var(--ink);

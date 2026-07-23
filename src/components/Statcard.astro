@@ -1,0 +1,69 @@
+---
+interface Props {
+  value: string | number;
+  label: string;
+  icon?: string;
+  accent?: string; // any CSS color
+}
+
+const {
+  value,
+  label,
+  icon,
+  accent = "#7c3aed",
+} = Astro.props;
+---
+
+<div class="stat-card" style={`--accent: ${accent}`}>
+  {icon && <span class="stat-icon">{icon}</span>}
+  <span class="stat-value">{value}</span>
+  <span class="stat-label">{label}</span>
+</div>
+
+<style>
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+
+    padding: 1.5rem 2rem;
+    border-radius: 1.25rem;
+    border: 1.5px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    background: color-mix(in srgb, var(--accent) 6%, white);
+
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 12%, transparent);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  .stat-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .stat-value {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+
+  .stat-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    max-width: 140px;
+    line-height: 1.4;
+  }
+</style>
