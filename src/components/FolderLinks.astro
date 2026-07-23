@@ -33,7 +33,8 @@ const {
     {
       label: 'My Resume',
       type: 'download',
-href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-Resume.pdf',
+      href: `${import.meta.env.BASE_URL}resume.pdf`,
+      filename: 'GwendolynTangog-Resume.pdf',
       description: 'PDF · Updated July 2026',
       cta: 'Download résumé',
     },
@@ -48,45 +49,51 @@ href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-R
 } = Astro.props;
 ---
 
-<div class="folder" data-count={tabs.length}>
-  <div class="folder-shadow" aria-hidden="true"></div>
+<div class="folder-wrap">
+  <div class="folder" data-count={tabs.length}>
+    <div class="folder-shadow" aria-hidden="true"></div>
 
-  <div class="folder-stack" style={`--count:${tabs.length}`}>
-    {tabs.map((tab, i) => (
-      <div class="folder-panel" data-index={i} style={`--i:${i}`}>
-        <button
-          class="tab-flag"
-          type="button"
-          data-target={i}
-          aria-expanded="false"
-          aria-controls={`panel-body-${i}`}
-        >
-          <span class="tab-flag-label">{tab.label}</span>
-        </button>
+    <div class="folder-stack" style={`--count:${tabs.length}`}>
+      {tabs.map((tab, i) => (
+        <div class="folder-panel" data-index={i} style={`--i:${i}`}>
+          <button
+            class="tab-flag"
+            type="button"
+            data-target={i}
+            aria-expanded="false"
+            aria-controls={`panel-body-${i}`}
+          >
+            <span class="tab-flag-label">{tab.label}</span>
+          </button>
 
-        <div class="panel-body" id={`panel-body-${i}`}>
-          <p class="panel-kicker">{tab.type === 'download' ? 'Download' : 'Coming soon!'}</p>
-          <h3 class="panel-title">{tab.label}</h3>
-          {tab.description && <p class="panel-desc">{tab.description}</p>}
+          <div class="panel-body" id={`panel-body-${i}`}>
+            <p class="panel-kicker">{tab.type === 'download' ? 'Download' : 'Coming soon!'}</p>
+            <h3 class="panel-title">{tab.label}</h3>
+            {tab.description && <p class="panel-desc">{tab.description}</p>}
 
-          {tab.type === 'download' ? (
-            <a class="panel-cta" href={tab.href} download={tab.filename ?? true}>
-              {tab.cta ?? 'Download'}
-              <span class="panel-cta-icon" aria-hidden="true">↓</span>
-            </a>
-          ) : (
-            <a class="panel-cta" href={tab.href} target="_blank" rel="noopener noreferrer">
-              {tab.cta ?? 'Visit'}
-              <span class="panel-cta-icon" aria-hidden="true">↗</span>
-            </a>
-          )}
+            {tab.type === 'download' ? (
+              <a class="panel-cta" href={tab.href} download={tab.filename ?? true}>
+                {tab.cta ?? 'Download'}
+                <span class="panel-cta-icon" aria-hidden="true">↓</span>
+              </a>
+            ) : (
+              <a class="panel-cta" href={tab.href} target="_blank" rel="noopener noreferrer">
+                {tab.cta ?? 'Visit'}
+                <span class="panel-cta-icon" aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </div>
 
 <style>
+  .folder-wrap {
+    width: 100%;
+  }
+
   .folder {
     --bg: #eaf5ea;
     --bg-panel: #ffffff;
@@ -132,10 +139,6 @@ href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-R
     transform-origin: left center;
     transition: transform 0.45s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.35s ease;
     will-change: transform;
-    /* Panels are full-size but mostly transparent — without this, an
-       inactive panel's invisible area would still sit on top and silently
-       block clicks/hovers on the tabs and cards beneath it. Only the
-       actual visible controls (tab, card link) opt back in below. */
     pointer-events: none;
   }
 
@@ -151,10 +154,6 @@ href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-R
     z-index: 200;
   }
 
-  /* Tabs are positioned independently of the panel body beneath them, so a
-     later tab (e.g. LinkedIn) is never covered by an earlier panel's card
-     and stays clickable/hoverable at all times. Each tab sits further
-     right than the one before it, tucked slightly under it. */
   .tab-flag {
     all: unset;
     cursor: pointer;
@@ -193,10 +192,6 @@ href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-R
     outline-offset: 2px;
   }
 
-  /* The active tab pulls flush against the left edge of its card so the
-     two read as one continuous piece instead of a tab floating above a
-     gap. Inactive tabs keep their staggered position, peeking out to the
-     right, tucked behind the active one. */
   .folder-panel.is-open .tab-flag {
     left: 0;
     background: var(--green-dark);
@@ -332,8 +327,6 @@ href: `${import.meta.env.BASE_URL}resume.pdf`,      filename: 'GwendolynTangog-R
           if (lockedIndex === null) setOpen(DEFAULT_INDEX);
         });
 
-        // Tap-to-lock support for touch devices: tap opens and holds a tab
-        // open; tapping the already-open tab returns to the default.
         flag.addEventListener('click', () => {
           lockedIndex = lockedIndex === index ? null : index;
           setOpen(lockedIndex ?? DEFAULT_INDEX);
